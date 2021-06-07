@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PhaserJS #7</title>
+  <link rel="shortcut icon" type="image/png" href="images/ico_full.png"/>
+  <link rel="stylesheet" href="stylesheet/prism.css">
+  <link rel="stylesheet" href="stylesheet/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+  <!-- Introduction -->
+  <div class="banner" style="display: block !important; background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('https://d2skuhm0vrry40.cloudfront.net/2018/articles/2018-08-29-13-52/nintendo-takes-down-11-year-old-pokemon-fangame-kit-1535547168922.jpg/EG11/thumbnail/750x422/format/jpg/quality/60');">
+    <div class="container text-center">
+      <div class="main">
+        <img src="images/logo.png" alt="">
+        <div class="class-title text-center">
+          <h1>PhaserJS<br> Fiche 7</h1>
+        </div>
+      </div>
+      <p>Durant cette session, on va plus se concentrer sur la création de jeux vidéos dans le language JavaScript. Pour ce faire, on se servira de la librarie <b>Phaser</b>.</p>
+    </div>
+  </div>
+
+  <div class="container" id="challenge">
+
+    <div class="accordion" id="accordionExample">
+
+      <!-- Étape 1 -->
+      <div class="card">
+        <div class="card-header" id="heading1">
+          <h2 class="mb-0">
+            <button class="btn btn-link done task" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+              Étape 1 - Défis à compléter avant
+            </button>
+          </h2>
+        </div>
+        <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordionExample">
+          <div class="card-body">
+            <p>Avant d'entamer ce défi, assure toi d'avoir déjà fait ceux ci:</p>
+            <ul>
+              <li><a href="https://techieslab.github.io/PhaserJS-Introduction/">PhaserJS - Personnage</a></li>
+              <li><a href="https://techieslab.github.io/PhaserJS-Platforms/">PhaserJS - Plateformes</a></li>
+              <li><a href="https://techieslab.github.io/PhaserJS-GagnerPerdre/">PhaserJS - Gagner et Perdre</a></li>
+              <li><a href="https://techieslab.github.io/PhaserJS-MapFacile/">PhaserJS - Map Facile</a></li>
+              <li><a href="https://techieslab.github.io/PhaserJS-PointsEtVies/">PhaserJS - Points et Vies</a></li>
+              <li><a href="https://techieslab.github.io/PhaserJS-CoeursEtEnnemis/">PhaserJS - Coeurs et Ennemis</a></li>
+            </ul>
+            <p>Ensuite, assure-toi de te munir d'une grande motivation et soif d'apprendre!</p>
+            <p>Aussi, assure-toi que tu sois bien connecté à ton compte <a href="https://repl.it">Repl.It</a>, et que tu aies ton projet de la fois passée.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 2 -->
+      <div class="card">
+        <div class="card-header" id="heading2">
+          <h2 class="mb-0">
+            <button class="btn btn-link task" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+              Étape 2 - Animations
+            </button>
+          </h2>
+        </div>
+        <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
+          <div class="card-body">
+            <p>Souviens-toi ce que je vous ai promis après le premier cours: "On va ajouter des animations au cours suivant". Aujourd'hui ce sera enfin le cas!</p>
+
+            <p>Pour pouvoir faire des animations il te faut plusieurs versions de ton joueur. Pour l'instant, on va créer une animation de personnage qui marche. Fais donc quelques pixelarts différents où les pieds bougent peu à peu.</p>
+
+            <img src="images/enemy.png" alt="" width="100%">
+
+            <p>Dans ReplIt, tu peux alors créer un dossier qui s'appelle "player". Dans celui ci, ajoute tous les dessins du joueur.</p>
+
+            <p>Il nous faut alors <code>load</code> tous les costumes du joueur. Dans la fonction <code>preload</code>, tu peux les load un à un en tant que "player-XY" (Change le XY par un numéro à chaque fois!).</p>
+
+            <pre><code class="language-js">
+              this.load.image("player-XY", "player/NOM_DU_COSTUME.png");
+            </code></pre>
+
+            <p>Maintenant qu'on a <code>load</code> toutes les parties de l'animation, on doit encore créer l'animation. Cela va se passer dans la fonction <code>create</code>, après avvoir défini <code>this.player</code>.</p>
+
+            <pre><code class="language-js">
+              this.anims.create({
+                key: "player_walk",
+                frames: [
+                  {key:"player-01"}, 
+                  {key:"player-02"}, 
+                  {key:"player-03"}, 
+                  {key:"player-04"}, 
+                  {key:"player-05"}, 
+                  {key:"player-06"}, 
+                  {key:"player-07"}, 
+                  {key:"player-08"}
+                  ],
+                frameRate: 10
+              });
+            </code></pre>
+
+            <p>Regardons ce code de plus près:</p>
+
+            <ul>
+              <li>le <code>key</code> est simplement le nom de l'animation, tu peux l'appeller comme tu veux mais fais en sorte que tu t'en souviennes.</li>
+              <li>le <code>key</code> dans les <code>frames</code> est le nom du costume à ce moment là. Fais en sorte de les mettre dans le bon ordre!</li>
+              <li>le <code>framerate</code> représente la vitesse de ton animation. Tu pourra jouer avec une fois qu'on a ajouté l'animation dans le jeu.</li>
+            </ul>
+
+            <p>Maintenant il ne manque plus que d'activer notre animation. Rien de plus facile. Lorsque tu marches, donc lorsque tu changes la <code>VelocityY</code> du joueur, tu veux ajouter ce code:</p>
+
+            <pre><code class="language-js">
+              this.player.anims.play("player_walk", true);
+            </code></pre>
+
+            <p>Et voilà! Lorsque tu marches, ton joueur marche avec toi!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 3 -->
+      <div class="card">
+        <div class="card-header" id="heading3">
+          <h2 class="mb-0">
+            <button class="btn btn-link task" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+              Étape 3 - Animation de saut
+            </button>
+          </h2>
+        </div>
+        <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
+          <div class="card-body">
+            <p>Tu remarques surement un problème lorsque tu sautes. En effet, on aimerait peut-être jouer une autre animation lorsque tu sautes. L'animation que je te propose est comme suit:</p>
+
+            <ul>
+              <li>Lorsque tu montes, ton personnage ne bouges plus ses pieds mais regarde vers le haut.</li>
+              <li>Lorsque tu tombes, ton personnage ne bouge bien sûr pas ses pieds non plus, mais regarde vers le bas.</li>
+            </ul>
+
+            <p>Tout d'abord, il faut dessiner ces costumes supplémentaires, les ajouter dans le ReplIt et les <code>load</code> dans to code.</p>
+
+            <p>Ensuite, il faut créer deux animations, une pour monter et une pour descendre. Une animation peut être composée d'un seul costume si tu le souhaites.</p>
+           
+            <pre><code class="language-js">
+              this.anims.create({
+                key: "player_up",
+                frames: [
+                  {key:"player-09"}
+                  ],
+                frameRate: 10
+              });
+
+              this.anims.create({
+                key: "player_down",
+                frames: [
+                  {key:"player-10"}
+                  ],
+                frameRate: 10
+              });
+            </code></pre>
+
+            <p>Maintenant, on veut activer ces animations lorsqu'on monte ou descend. Dans la fonction <code>update</code>, on va vérifier si on monte ou si on descend.</p>
+
+            <pre><code class="language-js">
+              if (this.player.body.velocity.y > 0) {
+                // Regarder vers le bas
+              } 
+              if (this.player.body.velocity.y < 0) {
+                // Regarder vers le haut
+              }
+              if (this.player.body.velocity.y === 0) {
+                // Marcher
+              }
+            </code></pre>
+
+            <p>Maintenant ton personnage va marcher que s'il ne monte ou tombe pas, et sinon il va regarder dans la direction où il se dirige. Super non?</p>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 4 -->
+      <div class="card">
+        <div class="card-header" id="heading4">
+          <h2 class="mb-0">
+            <button class="btn btn-link task" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+              Étape 4 - Challenges
+            </button>
+          </h2>
+        </div>
+        <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
+          <div class="card-body">
+            <p>Maintenant que tu sais à quel point c'est facile de faire une animation, tu peux en ajouter partout!</p>
+
+            <ul>
+              <li>Ajoute une animation sur tes ennemis qui bougent de la fiche #6</li>
+              <li>Ajoute une animation sur les pièces que tu collectionne</li>
+              <li>Ajoute une animation sur la pièce finale, qui te fais gagner le jeu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      
+    </div> 
+  </div>
+
+
+
+<div class="footer">
+  <div class="footer-links">
+    <a href="https://techieslab.be/"><i class="fas fa-globe"></i></i></a>
+    <a href="https://www.facebook.com/TechiesLabBrussels"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.linkedin.com/company/techies-lab/"><i class="fab fa-linkedin"></i></a>
+    <a href="https://twitter.com/TechiesLab"><i class="fab fa-twitter"></i></a>
+  </div>
+  <div class="footer-copyright">
+    <a href="https://techieslab.be" rel="noopener noreferrer" target="_blank" class="alert-link copyright">
+      <i class="far fa-copyright"></i> 2021 Techies Lab ASBL. All rights reserved.
+    </a>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="javascript/prism.js"></script>
+</body>
+</html>
